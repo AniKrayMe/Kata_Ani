@@ -29,13 +29,12 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void dropUsersTable() throws SQLException {
         Statement statement = null;
-        String sql = "DROP TABLE USER";
+        String sql = "DROP TABLE IF EXISTS USER";
         try {
             statement = connection.prepareStatement(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void saveUser(String name, String lastName, byte age) throws SQLException {

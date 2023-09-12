@@ -15,13 +15,18 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
-    public void createUsersTable() throws SQLException {
+    public void createUsersTable()  {
         Statement statement = null;
-        String sql = "CREATE TABLE IF NOT EXISTS USER";
+        String sql = "CREATE TABLE IF NOT EXISTS  kata_anikrayme.user (\n" +
+                "  id INT NOT NULL AUTO_INCREMENT,\n" +
+                "  name VARCHAR(45) NOT NULL,\n" +
+                "  lastname VARCHAR(45) NOT NULL,\n" +
+                "  age INT NOT NULL,\n" +
+                "  PRIMARY KEY (id));\n";
+
         try {
             statement = connection.createStatement();
             statement.executeUpdate(sql);
-            System.out.println("Таблица User Создана");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -29,7 +34,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
-    public void dropUsersTable() throws SQLException {
+    public void dropUsersTable()  {
         Statement statement = null;
         String sql = "DROP TABLE IF EXISTS USER";
         try {
@@ -40,7 +45,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
-    public void saveUser(String name, String lastName, byte age) throws SQLException {
+    public void saveUser(String name, String lastName, byte age) {
         PreparedStatement preparedStatement = null;
         String sql = "INSERT INTO USER (NAME, LASTNAME, AGE) VALUES (?, ?, ?)";
         try {
@@ -55,7 +60,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     }
 
-    public void removeUserById(long id) throws SQLException {
+    public void removeUserById(long id)  {
         String sql = "DELETE FROM USER WHERE ID = " + id;
         PreparedStatement preparedStatement = null;
         try {
@@ -96,7 +101,7 @@ public class UserDaoJDBCImpl implements UserDao {
         return users;
     }
 
-    public void cleanUsersTable() throws SQLException {
+    public void cleanUsersTable()  {
         PreparedStatement prepareStatement = null;
         String sql = "DELETE FROM USER";
         try {

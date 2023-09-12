@@ -19,7 +19,9 @@ public class UserDaoJDBCImpl implements UserDao {
         Statement statement = null;
         String sql = "CREATE TABLE IF NOT EXISTS USER";
         try {
-            statement = connection.prepareStatement(sql);
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            System.out.println("Таблица User Создана");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -31,7 +33,8 @@ public class UserDaoJDBCImpl implements UserDao {
         Statement statement = null;
         String sql = "DROP TABLE IF EXISTS USER";
         try {
-            statement = connection.prepareStatement(sql);
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
